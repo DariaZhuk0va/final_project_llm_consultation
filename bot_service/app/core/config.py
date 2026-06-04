@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     # JWT (для валидации)
     JWT_SECRET: str
     JWT_ALG: str = "HS256"
+    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
     # OpenRouter
     OPENROUTER_API_KEY: str
