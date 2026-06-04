@@ -9,6 +9,9 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
+    APP_NAME: str = "Bot Service"
+    DEBUG: bool = True
+
     # Telegram Bot
     BOT_TOKEN: str
 

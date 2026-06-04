@@ -34,8 +34,8 @@ async def save_token(message: Message):
         return
 
     redis = await get_redis()
-    # Время жизни токена в Redis – можно взять из настроек или задать 1 час
-    ttl = getattr(settings, "JWT_ACCESS_TOKEN_EXPIRE_MINUTES", 30) * 60
+
+    ttl = settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES * 60
     await redis.set(f"tg_user:{message.from_user.id}", jwt_token, ex=ttl)
 
     await message.answer("✅ Токен сохранён. Теперь вы можете отправлять сообщения боту.")
