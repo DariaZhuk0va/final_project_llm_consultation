@@ -46,7 +46,7 @@ def create_access_token(sub: str, role: str) -> str:
         "sub": sub,
         "role": role,
         "iat": _now(),
-        "exp": _now() + settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+        "exp": _now() + settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
     }
     return jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.JWT_ALG)  
 
