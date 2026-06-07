@@ -76,19 +76,26 @@ async def handle_message(message: Message):
     llm_request.delay(tg_chat_id=user_id, prompt=prompt)
     await message.answer("⏳ Запрос принят, ищу ответ...")
 
-    # 4. Ожидаем результат в Redis (ключ llm_result:<user_id>)
+    # 4. Ожидаем результат в Redis
     result_key = f"llm_result:{user_id}"
-    timeout_seconds = 30  # максимум ждём 30 секунд
-    poll_interval = 0.5   # проверяем каждые 0.5 секунды
+    timeout_seconds = 30
+    poll_interval = 0.5
     elapsed = 0
     while elapsed < timeout_seconds:
         await asyncio.sleep(poll_interval)
         elapsed += poll_interval
         result = await redis.get(result_key)
         if result is not None:
-            # Результат найден – отправляем и удаляем ключ
-            await message.answer(result)
             await redis.delete(result_key)
+
+            MAX_LEN = 4096
+            if len(result) <= MAX_LEN:
+                await message.answer(result)
+            else:
+                for i in range(0, len(result), MAX_LEN):
+                    chunk = result[i:i+MAX_LEN]
+                    await message.answer(chunk)
+                    await asyncio.sleep(0.5)  
             return
 
     # Если время вышло

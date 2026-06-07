@@ -1,4 +1,5 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import Field
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
@@ -13,7 +14,7 @@ class Settings(BaseSettings):
     DEBUG: bool = True
 
     # Telegram Bot
-    BOT_TOKEN: str
+    BOT_TOKEN: str = Field(..., alias="TELEGRAM_BOT_TOKEN")
 
     # JWT (для валидации)
     JWT_SECRET: str

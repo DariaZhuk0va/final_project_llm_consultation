@@ -14,6 +14,7 @@ def llm_request(self, tg_chat_id: int, prompt: str) -> None:
     Ключ: llm_result:{tg_chat_id}
     """
     result_key = f"llm_result:{tg_chat_id}"
+
     try:
         client = OpenRouterClient()
         reply = client.chat_completion(messages=[{"role": "user", "content": prompt}])
