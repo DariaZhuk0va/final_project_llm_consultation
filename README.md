@@ -8,6 +8,7 @@
 
 # Cтруктура катологов
 
+```
 final_project_llm_consultation/
 ├── auth_service/                 # Сервис аутентификации
 │   ├── app/
@@ -38,6 +39,7 @@ final_project_llm_consultation/
 │   └── pyproject.toml
 │
 └── README.txt                     # Описание проекта и запуск
+```
 
 # Технологии
 
