@@ -1,5 +1,4 @@
 import redis
-from celery import Task
 from app.core.config import settings
 from app.infra.celery_app import celery_app
 from app.services.openrouter_client import OpenRouterClient  # импорт клиента
