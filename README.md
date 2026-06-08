@@ -103,6 +103,7 @@ final_project_llm_consultation/
    Сервер будет доступен по адресу: http://localhost:8000
 
 6. Запуск Bot Service (три компонента)
+
    6.1. Celery worker:
         cd bot_service
         uv run celery -A app.infra.celery_app worker --loglevel=info --without-mingle --without-gossip --without-heartbeat --pool=solo
@@ -113,7 +114,7 @@ final_project_llm_consultation/
    6.3. (Опционально) FastAPI healthcheck:
         uv run uvicorn app.main:app --port 8001
 
-Пользовательский сценарий
+# Пользовательский сценарий
 
 1. Регистрация в Auth Service через Swagger (POST /auth/register).
 2. Логин (POST /auth/login) – получаем access_token.
@@ -122,13 +123,13 @@ final_project_llm_consultation/
 
 # Тестирование
 
-Auth Service:
+## Auth Service:
   cd auth_service
   uv run pytest -v
   - Модульные тесты: tests/test_security.py
   - Интеграционные тесты API: tests/test_api.py (с in-memory SQLite)
 
-Bot Service:
+## Bot Service:
   cd bot_service
   uv run pytest -v
   - Модульные тесты: tests/test_jwt.py
